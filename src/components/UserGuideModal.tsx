@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { I18nLangCode } from '../types';
 import { SUPPORTED_LANGUAGES, TRANSLATIONS } from '../data/translations';
 import { PROJECTS_DATA } from '../data/projectsData';
+import { TTSControlBar } from './TTSControlBar';
 import { X, Search, Globe, Copy, Check, BookOpen, Layers, ShieldCheck, Cpu } from 'lucide-react';
 
 interface UserGuideModalProps {
@@ -116,7 +117,7 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({
         </div>
 
         {/* Search & Quick Filter Bar */}
-        <div className="px-6 py-3 border-b border-slate-800 bg-slate-900/60 flex items-center justify-between gap-4">
+        <div className="px-6 py-3 border-b border-slate-800 bg-slate-900/60 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
@@ -127,12 +128,13 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({
               className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
             />
           </div>
-          <div className="hidden sm:flex items-center gap-2 text-xs text-slate-400">
-            <span>21 Target Languages</span>
-            <span>·</span>
-            <span>6 Systems Modules</span>
-            <span>·</span>
-            <span>21 Translations Active</span>
+          <div className="flex-1 sm:max-w-xs">
+            <TTSControlBar
+              currentLang={currentLang}
+              textToRead={`${translation.title}. ${translation.subtitle}. ${translation.introduction}. ${translation.quickStart}`}
+              title="Narrate Guide"
+              compact={true}
+            />
           </div>
         </div>
 

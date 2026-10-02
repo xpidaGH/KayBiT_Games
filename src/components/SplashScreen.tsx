@@ -1,17 +1,19 @@
 import React from 'react';
 import { ProjectId } from '../types';
 import { PROJECTS_DATA } from '../data/projectsData';
-import { BookOpen, Layers, Terminal, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Layers, Terminal, Sparkles, ArrowRight, CheckCircle2, Download } from 'lucide-react';
 
 interface SplashScreenProps {
   onSelectProject: (id: ProjectId) => void;
   onOpenUserGuide: () => void;
+  onOpenInstall: () => void;
   onOpenMatrix: () => void;
 }
 
 export const SplashScreen: React.FC<SplashScreenProps> = ({
   onSelectProject,
   onOpenUserGuide,
+  onOpenInstall,
   onOpenMatrix,
 }) => {
   return (
@@ -46,11 +48,19 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({
             </button>
 
             <button
+              onClick={onOpenInstall}
+              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors flex items-center gap-2"
+            >
+              <Download className="w-4 h-4 text-cyan-400" />
+              <span>Download Native App</span>
+            </button>
+
+            <button
               onClick={() => onSelectProject('voxel')}
-              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors flex items-center gap-2"
+              className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 transition-colors flex items-center gap-1.5"
             >
               <Layers className="w-4 h-4 text-emerald-400" />
-              <span>Launch Project 01 (Voxel Engine)</span>
+              <span>Launch Project 01</span>
             </button>
 
             <button

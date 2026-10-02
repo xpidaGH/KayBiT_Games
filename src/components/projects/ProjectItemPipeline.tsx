@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ProjectData } from '../../types';
+import { ProjectData, I18nLangCode } from '../../types';
+import { TTSControlBar } from '../TTSControlBar';
 import { Play, Pause, RotateCcw, Cpu, Activity, History, Copy, Check, ArrowRight } from 'lucide-react';
 
 interface ProjectItemPipelineProps {
   project: ProjectData;
+  currentLang?: I18nLangCode;
 }
 
 interface PipelineItem {
@@ -13,7 +15,7 @@ interface PipelineItem {
   segmentId: number;
 }
 
-export const ProjectItemPipeline: React.FC<ProjectItemPipelineProps> = ({ project }) => {
+export const ProjectItemPipeline: React.FC<ProjectItemPipelineProps> = ({ project, currentLang = 'en' }) => {
   const [pipelineMode, setPipelineMode] = useState<'DOD' | 'OOP'>('DOD');
   const [isRunning, setIsRunning] = useState<boolean>(true);
   const [simulationSpeed, setSimulationSpeed] = useState<number>(1);
@@ -167,6 +169,13 @@ export const ProjectItemPipeline: React.FC<ProjectItemPipelineProps> = ({ projec
           ))}
         </div>
       </div>
+
+      {/* Audio Architecture Read Aloud Bar */}
+      <TTSControlBar
+        currentLang={currentLang}
+        textToRead={`${project.title}. ${project.subtitle}. ${project.overview}. Requirements: ${project.requirements.map(r => r.title + ': ' + r.description).join('. ')}`}
+        title={`Listen: ${project.title}`}
+      />
 
       {/* Main Interactive Stage & Telemetry Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

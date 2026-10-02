@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ProjectData } from '../../types';
+import { ProjectData, I18nLangCode } from '../../types';
+import { TTSControlBar } from '../TTSControlBar';
 import { Wrench, Play, RotateCcw, AlertTriangle, GitBranch, Check, Copy } from 'lucide-react';
 
 interface ProjectKinematicCompilerProps {
   project: ProjectData;
+  currentLang?: I18nLangCode;
 }
 
-export const ProjectKinematicCompiler: React.FC<ProjectKinematicCompilerProps> = ({ project }) => {
+export const ProjectKinematicCompiler: React.FC<ProjectKinematicCompilerProps> = ({ project, currentLang = 'en' }) => {
   // Mechanical rig parameters
   const [thrusterForce, setThrusterForce] = useState<number>(65);
   const [springStiffness, setSpringStiffness] = useState<number>(40);
@@ -153,6 +155,13 @@ export const ProjectKinematicCompiler: React.FC<ProjectKinematicCompilerProps> =
           ))}
         </div>
       </div>
+
+      {/* Audio Architecture Read Aloud Bar */}
+      <TTSControlBar
+        currentLang={currentLang}
+        textToRead={`${project.title}. ${project.subtitle}. ${project.overview}. Requirements: ${project.requirements.map(r => r.title + ': ' + r.description).join('. ')}`}
+        title={`Listen: ${project.title}`}
+      />
 
       {/* Main Grid: Rig Canvas & Logic AST Compiler */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

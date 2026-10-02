@@ -70,6 +70,31 @@ export interface UserGuideSection {
   }[];
 }
 
+export type TTSPlaybackState = 'idle' | 'playing' | 'paused' | 'stopped';
+
+export interface TTSVoiceMeta {
+  name: string;
+  lang: string;
+  isDefault: boolean;
+  isLocalService: boolean;
+}
+
+export interface PlatformInstallGuide {
+  id: 'android' | 'ios' | 'windows' | 'macos' | 'pwa';
+  name: string;
+  format: string;
+  platform: string;
+  badge: string;
+  requirements: string;
+  summary: string;
+  steps: string[];
+  commandSnippets: {
+    title: string;
+    command: string;
+  }[];
+  offlineNotice: string;
+}
+
 export interface UserGuideTranslation {
   languageName: string;
   dir: 'ltr' | 'rtl';

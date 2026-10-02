@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { ProjectData } from '../../types';
+import { ProjectData, I18nLangCode } from '../../types';
+import { TTSControlBar } from '../TTSControlBar';
 import { Database, ShieldCheck, RefreshCw, GitCommit, Binary, Check, Copy } from 'lucide-react';
 
 interface ProjectRelationalEconomyProps {
   project: ProjectData;
+  currentLang?: I18nLangCode;
 }
 
-export const ProjectRelationalEconomy: React.FC<ProjectRelationalEconomyProps> = ({ project }) => {
+export const ProjectRelationalEconomy: React.FC<ProjectRelationalEconomyProps> = ({ project, currentLang = 'en' }) => {
   const [activeCodeLang, setActiveCodeLang] = useState<string>('SQL');
   const [traderABalance, setTraderABalance] = useState<number>(450);
   const [traderBBalance, setTraderBBalance] = useState<number>(1200);
@@ -84,6 +86,13 @@ export const ProjectRelationalEconomy: React.FC<ProjectRelationalEconomyProps> =
           ))}
         </div>
       </div>
+
+      {/* Audio Architecture Read Aloud Bar */}
+      <TTSControlBar
+        currentLang={currentLang}
+        textToRead={`${project.title}. ${project.subtitle}. ${project.overview}. Requirements: ${project.requirements.map(r => r.title + ': ' + r.description).join('. ')}`}
+        title={`Listen: ${project.title}`}
+      />
 
       {/* Main Grid: ACID Escrow Marketplace & Event Sourcing Ledger */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

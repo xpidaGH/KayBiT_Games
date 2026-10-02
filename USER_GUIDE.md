@@ -15,7 +15,8 @@ Rather than constructing superficial game clones, this curriculum leverages the 
 1. **Interactive Sandbox Viewport**: Each project includes an interactive real-time simulation stage demonstrating the internal algorithms (octrees, memory pools, graph segments, AST wiring, container quotas, and ACID transactions).
 2. **Multi-Language Source Inspection**: Every module provides verified implementations in its assigned target languages. Toggle between language tabs to contrast bare-metal, managed, functional, and scripting paradigms.
 3. **Telemetry & Benchmark Deck**: Real-time performance monitors provide actionable metrics: CPU L1/L2 cache locality, memory allocation rates, serialization speed, packet delta compression ratios, and AST cycle evaluation times.
-4. **Internationalization Switcher**: Available in the top header and within the User Guide modal. Switch instantly between **21 languages** with native typography and bidirectional layout support (RTL for Arabic, Urdu, and Persian).
+4. **Internationalization & Native Text-to-Speech (TTS)**: Switch between **22 internationalization languages** with native typography and bidirectional layout support (RTL for Arabic, Urdu, and Persian). Students can listen to the full guide and module overviews read aloud via the integrated `window.speechSynthesis` engine with cross-browser freeze protection, speed controls, and background audio support.
+5. **Cross-Platform Native Deployment (INSTALLATION.md)**: Install natively on Android (APK / AAB), iOS / iPadOS, Windows (.exe / .msi), macOS (.dmg), or as an offline Progressive Web App directly from the browser. Full compilation toolchains are detailed in `INSTALLATION.md`.
 
 ---
 

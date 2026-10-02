@@ -19,9 +19,19 @@ Developed specifically for advanced programming students and systems engineering
 * **21 Target Programming Languages**:
   * Python, JavaScript, TypeScript, Java, C#, Kotlin, Dart/Flutter, Bash/Shell, Rust, Go (Golang), C++, C, PHP, Ruby, PowerShell, SQL, R, Scala, MATLAB, COBOL, x86-64 Assembly.
 
-* **21 Internationalization Languages**:
+* **21 Internationalization Languages & Native Text-to-Speech (TTS)**:
   * Fully translated comprehensive User Guide available in English, French, German, Italian, Spanish, Portuguese, Indonesian, Swahili, Turkish, Russian, Chinese (Simplified), Japanese, Arabic (with RTL), Urdu (with RTL), Hindi, Vietnamese, Korean, Farsi/Persian (with RTL), Marathi, Bangla, Tamil, and Telugu.
   * Instant dropdown switching inside the application and modal.
+  * **Native Text-to-Speech (TTS) Narration**: Built with the native `window.speechSynthesis` API matching the closest system voice for all 22 language guides with sentence chunking (preventing WebKit speech freeze), background audio permissions, and cross-browser playback controls (Play, Pause, Stop, Rate selector).
+
+* **Cross-Platform Native Installation (INSTALLATION.md)**:
+  * Complete, step-by-step installation guides for:
+    * **Android**: Standalone APK & Google Play App Bundle (AAB) via Capacitor
+    * **iOS / iPadOS**: Apple Home Screen PWA & Native Xcode IPA Bundle
+    * **Windows**: Native `.exe` (NSIS) and `.msi` installers via Electron / Tauri
+    * **macOS**: Universal `.dmg` and `.app` for Apple Silicon & Intel x64
+    * **Universal Web**: Instant PWA with 100% offline service worker caching.
+  * Direct in-app installation modal with one-click build script generation.
 
 ---
 

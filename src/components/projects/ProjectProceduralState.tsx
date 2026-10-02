@@ -1,12 +1,14 @@
 import React, { useState, useMemo } from 'react';
-import { ProjectData } from '../../types';
+import { ProjectData, I18nLangCode } from '../../types';
+import { TTSControlBar } from '../TTSControlBar';
 import { Compass, Sparkles, BarChart2, Radio, Check, Copy } from 'lucide-react';
 
 interface ProjectProceduralStateProps {
   project: ProjectData;
+  currentLang?: I18nLangCode;
 }
 
-export const ProjectProceduralState: React.FC<ProjectProceduralStateProps> = ({ project }) => {
+export const ProjectProceduralState: React.FC<ProjectProceduralStateProps> = ({ project, currentLang = 'en' }) => {
   const [coordX, setCoordX] = useState<number>(142);
   const [coordY, setCoordY] = useState<number>(-89);
   const [coordZ, setCoordZ] = useState<number>(315);
@@ -80,6 +82,13 @@ export const ProjectProceduralState: React.FC<ProjectProceduralStateProps> = ({ 
           ))}
         </div>
       </div>
+
+      {/* Audio Architecture Read Aloud Bar */}
+      <TTSControlBar
+        currentLang={currentLang}
+        textToRead={`${project.title}. ${project.subtitle}. ${project.overview}. Requirements: ${project.requirements.map(r => r.title + ': ' + r.description).join('. ')}`}
+        title={`Listen: ${project.title}`}
+      />
 
       {/* Main Grid: Coordinate Exploration & Statistical Telemetry */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

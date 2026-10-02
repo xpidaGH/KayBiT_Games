@@ -1,12 +1,13 @@
 import React from 'react';
 import { ProjectId, I18nLangCode } from '../types';
 import { SUPPORTED_LANGUAGES } from '../data/translations';
-import { BookOpen, Globe, Cpu } from 'lucide-react';
+import { BookOpen, Globe, Cpu, Download } from 'lucide-react';
 
 interface NavbarProps {
   currentProject: ProjectId | 'splash' | 'matrix';
   onSelectProject: (id: ProjectId | 'splash' | 'matrix') => void;
   onOpenUserGuide: () => void;
+  onOpenInstall: () => void;
   currentLang: I18nLangCode;
   onChangeLang: (lang: I18nLangCode) => void;
 }
@@ -15,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentProject,
   onSelectProject,
   onOpenUserGuide,
+  onOpenInstall,
   currentLang,
   onChangeLang,
 }) => {
@@ -109,10 +111,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             </select>
           </div>
 
+          {/* Install / Download App Button */}
+          <button
+            onClick={onOpenInstall}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors whitespace-nowrap"
+            title="Download & Install for Android, iOS, Windows, macOS"
+          >
+            <Download className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Install App</span>
+          </button>
+
           {/* User Guide Action Button */}
           <button
             onClick={onOpenUserGuide}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-900 bg-cyan-400 hover:bg-cyan-300 rounded-lg shadow-sm transition-colors whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg shadow-sm transition-colors whitespace-nowrap"
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>User Guide</span>

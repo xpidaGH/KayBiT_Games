@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ProjectData } from '../../types';
+import { ProjectData, I18nLangCode } from '../../types';
+import { TTSControlBar } from '../TTSControlBar';
 import { Layers, Play, RotateCcw, Cpu, Network, Zap, Check, Copy } from 'lucide-react';
 
 interface ProjectVoxelEngineProps {
   project: ProjectData;
+  currentLang?: I18nLangCode;
 }
 
-export const ProjectVoxelEngine: React.FC<ProjectVoxelEngineProps> = ({ project }) => {
+export const ProjectVoxelEngine: React.FC<ProjectVoxelEngineProps> = ({ project, currentLang = 'en' }) => {
   // Interactive Simulation Controls
   const [octaves, setOctaves] = useState<number>(3);
   const [persistence, setPersistence] = useState<number>(0.5);
@@ -198,6 +200,13 @@ export const ProjectVoxelEngine: React.FC<ProjectVoxelEngineProps> = ({ project 
           ))}
         </div>
       </div>
+
+      {/* Audio Architecture Read Aloud Bar */}
+      <TTSControlBar
+        currentLang={currentLang}
+        textToRead={`${project.title}. ${project.subtitle}. ${project.overview}. Requirements: ${project.requirements.map(r => r.title + ': ' + r.description).join('. ')}`}
+        title={`Listen: ${project.title}`}
+      />
 
       {/* Main Interactive Stage & Control Deck (Split 65/35) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { ProjectData } from '../../types';
+import { ProjectData, I18nLangCode } from '../../types';
+import { TTSControlBar } from '../TTSControlBar';
 import { Terminal, Shield, Play, Lock, AlertCircle, Check, Copy } from 'lucide-react';
 
 interface ProjectSandboxedVMProps {
   project: ProjectData;
+  currentLang?: I18nLangCode;
 }
 
-export const ProjectSandboxedVM: React.FC<ProjectSandboxedVMProps> = ({ project }) => {
+export const ProjectSandboxedVM: React.FC<ProjectSandboxedVMProps> = ({ project, currentLang = 'en' }) => {
   const [activeCodeLang, setActiveCodeLang] = useState<string>('TypeScript');
   const [scriptType, setScriptType] = useState<'safe' | 'malicious_memory' | 'malicious_syscall'>('safe');
   const [isExecuting, setIsExecuting] = useState<boolean>(false);
@@ -97,6 +99,13 @@ export const ProjectSandboxedVM: React.FC<ProjectSandboxedVMProps> = ({ project 
           ))}
         </div>
       </div>
+
+      {/* Audio Architecture Read Aloud Bar */}
+      <TTSControlBar
+        currentLang={currentLang}
+        textToRead={`${project.title}. ${project.subtitle}. ${project.overview}. Requirements: ${project.requirements.map(r => r.title + ': ' + r.description).join('. ')}`}
+        title={`Listen: ${project.title}`}
+      />
 
       {/* Main Grid: Interactive VM Sandbox & Multi-tenant Mesh */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

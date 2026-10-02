@@ -4,6 +4,7 @@ import { PROJECTS_DATA } from './data/projectsData';
 import { Navbar } from './components/Navbar';
 import { SplashScreen } from './components/SplashScreen';
 import { UserGuideModal } from './components/UserGuideModal';
+import { InstallationModal } from './components/InstallationModal';
 import { TechMappingMatrix } from './components/TechMappingMatrix';
 import { ProjectVoxelEngine } from './components/projects/ProjectVoxelEngine';
 import { ProjectItemPipeline } from './components/projects/ProjectItemPipeline';
@@ -15,6 +16,7 @@ import { ProjectRelationalEconomy } from './components/projects/ProjectRelationa
 export default function App() {
   const [currentView, setCurrentView] = useState<ProjectId | 'splash' | 'matrix'>('splash');
   const [userGuideOpen, setUserGuideOpen] = useState<boolean>(false);
+  const [installModalOpen, setInstallModalOpen] = useState<boolean>(false);
   const [currentLang, setCurrentLang] = useState<I18nLangCode>('en');
 
   const currentProjectData = PROJECTS_DATA.find((p) => p.id === currentView);
@@ -26,6 +28,7 @@ export default function App() {
         currentProject={currentView}
         onSelectProject={(id) => setCurrentView(id)}
         onOpenUserGuide={() => setUserGuideOpen(true)}
+        onOpenInstall={() => setInstallModalOpen(true)}
         currentLang={currentLang}
         onChangeLang={(lang) => setCurrentLang(lang)}
       />
@@ -36,6 +39,7 @@ export default function App() {
           <SplashScreen
             onSelectProject={(id) => setCurrentView(id)}
             onOpenUserGuide={() => setUserGuideOpen(true)}
+            onOpenInstall={() => setInstallModalOpen(true)}
             onOpenMatrix={() => setCurrentView('matrix')}
           />
         )}
@@ -45,36 +49,42 @@ export default function App() {
         )}
 
         {currentView === 'voxel' && currentProjectData && (
-          <ProjectVoxelEngine project={currentProjectData} />
+          <ProjectVoxelEngine project={currentProjectData} currentLang={currentLang} />
         )}
 
         {currentView === 'pipeline' && currentProjectData && (
-          <ProjectItemPipeline project={currentProjectData} />
+          <ProjectItemPipeline project={currentProjectData} currentLang={currentLang} />
         )}
 
         {currentView === 'procedural' && currentProjectData && (
-          <ProjectProceduralState project={currentProjectData} />
+          <ProjectProceduralState project={currentProjectData} currentLang={currentLang} />
         )}
 
         {currentView === 'kinematic' && currentProjectData && (
-          <ProjectKinematicCompiler project={currentProjectData} />
+          <ProjectKinematicCompiler project={currentProjectData} currentLang={currentLang} />
         )}
 
         {currentView === 'sandbox' && currentProjectData && (
-          <ProjectSandboxedVM project={currentProjectData} />
+          <ProjectSandboxedVM project={currentProjectData} currentLang={currentLang} />
         )}
 
         {currentView === 'economy' && currentProjectData && (
-          <ProjectRelationalEconomy project={currentProjectData} />
+          <ProjectRelationalEconomy project={currentProjectData} currentLang={currentLang} />
         )}
       </main>
 
-      {/* User Guide Scrollable Modal with 21 Languages */}
+      {/* User Guide Scrollable Modal with 22 Languages & TTS */}
       <UserGuideModal
         isOpen={userGuideOpen}
         onClose={() => setUserGuideOpen(false)}
         currentLang={currentLang}
         onChangeLang={(lang) => setCurrentLang(lang)}
+      />
+
+      {/* Native Installation Guide Modal (Android, iOS, Windows, macOS, PWA) */}
+      <InstallationModal
+        isOpen={installModalOpen}
+        onClose={() => setInstallModalOpen(false)}
       />
 
       {/* Editorial Academic Footer */}
@@ -88,10 +98,16 @@ export default function App() {
 
           <div className="flex items-center gap-4">
             <button
+              onClick={() => setInstallModalOpen(true)}
+              className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+            >
+              Native Installers (APK / Win / Mac / iOS)
+            </button>
+            <button
               onClick={() => setUserGuideOpen(true)}
               className="text-slate-400 hover:text-white transition-colors"
             >
-              User Guide (21 Languages)
+              User Guide & TTS (22 Languages)
             </button>
             <button
               onClick={() => setCurrentView('matrix')}
@@ -107,3 +123,4 @@ export default function App() {
     </div>
   );
 }
+
