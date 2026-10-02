@@ -1,0 +1,6 @@
+{
+  "name": "KayBiT_Games: Sandbox Systems Programming Lab",
+  "description": "Advanced systems programming laboratory for 21 languages mapping 6 iconic sandbox architectures to distributed backends, compiler engines, and low-level computing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
