@@ -124,3 +124,26 @@ export interface UserGuideTranslation {
     definition: string;
   }[];
 }
+
+export type UIThemeId = 'editorial' | 'technical' | 'warm' | 'dark' | 'vibrant';
+
+export interface UIThemeOption {
+  id: UIThemeId;
+  name: string;
+  subtitle: string;
+  description: string;
+  previewBg: string;
+  previewCard: string;
+  previewAccent: string;
+  previewText: string;
+  fontTag: string;
+  badge: string;
+}
+
+export interface ModuleProgress {
+  completed: boolean;
+  completedAt?: string;
+  notes?: string;
+}
+
+export type LearningProgressMap = Record<ProjectId, ModuleProgress>;
